@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<head>
+    <title>Local Storage</title>
+    <script type="text/javascript">
+
+        const localStorage = window.localStorage
+        var count
+        function initialize(){
+            if(localStorage){
+                count = localStorage.getItem("visitCount") || 1
+                const newCount = parseInt(count)+1
+                localStorage.setItem("visitCount",newCount)
+            }
+            updateDOM()
+        }
+
+        function resetCount(){
+            localStorage.removeItem("visitCount")
+            initialize()
+        }
+
+        function updatePreference(color){
+            localStorage.setItem("userPreference",color)
+            updateDOM()
+
+        }
+
+        function clearStorage(){
+            localStorage.clear()
+            initialize()
+        }
+
+        function updateDOM(){
+            document.getElementById("visitCount").innerHTML="Visit Count = "+count
+            const bgColor = localStorage.getItem("userPreference")
+            document.getElementById("visitCount").style.backgroundColor=bgColor
+        }
+
+    </script>
+</head>
+<body onload="initialize()">
+    <!--L.O.C dealing with storing visit count-->
+    <div style="display: flex;flex-direction: column;align-items: center;">
+        <div id="visitCount"></div>
+        <button style="margin: 5px;" onclick="resetCount()">Reset visit count</button>
+        <button style="margin: 5px;" onclick="clearStorage()">Clear local storage</button>
+    <!--following L.O.C dealing with storing user preferences-->
+        <button style="margin: 5px;" onclick="updatePreference('red')">Red</button>
+        <button style="margin: 5px;" onclick="updatePreference('green')">Green</button>
+        <button style="margin: 5px;" onclick="updatePreference('blue')">Blue</button>
+    </div>
+</body>
+</html>
