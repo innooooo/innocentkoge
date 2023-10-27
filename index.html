@@ -7,7 +7,7 @@
         var count
         function initialize(){
             if(localStorage){
-                count = localStorage.getItem("visitCount") || 1
+                count = localStorage.getItem("visitCount") || 0
                 const newCount = parseInt(count)+1
                 localStorage.setItem("visitCount",newCount)
             }
